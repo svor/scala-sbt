@@ -31,7 +31,7 @@ components:
           path: /home/user/.cache/metals
         - name: bloop
           path: /home/user/.cache/bloop
-         - name: cache
+        - name: cache
           path: /home/user/.cache
       memoryLimit: 5Gi
       mountSources: true
@@ -50,7 +50,7 @@ components:
   - name: bloop
     volume:
       size: 512Mi
-   - name: cache
+  - name: cache
     volume:
       size: 512Mi
 commands:
