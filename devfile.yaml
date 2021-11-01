@@ -31,23 +31,28 @@ components:
           path: /home/user/.cache/metals
         - name: bloop
           path: /home/user/.cache/bloop
+         - name: cache
+          path: /home/user/.cache
       memoryLimit: 5Gi
       mountSources: true
   - name: sbt
     volume:
-      size: 1G
+      size: 512Mi
   - name: ivy2
     volume:
-      size: 1G
+      size: 512Mi
   - name: coursier
     volume:
-      size: 1G
+      size: 512Mi
   - name: metals
     volume:
-      size: 1G
+      size: 512Mi
   - name: bloop
     volume:
-      size: 1G
+      size: 512Mi
+   - name: cache
+    volume:
+      size: 512Mi
 commands:
   - id: build
     exec:
