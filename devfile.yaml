@@ -31,8 +31,6 @@ components:
           path: /home/user/.cache/metals
         - name: bloop
           path: /home/user/.cache/bloop
-        - name: cache
-          path: /home/user/.cache
       memoryLimit: 5Gi
       mountSources: true
   - name: sbt
@@ -48,9 +46,6 @@ components:
     volume:
       size: 512Mi
   - name: bloop
-    volume:
-      size: 512Mi
-  - name: cache
     volume:
       size: 512Mi
 commands:
