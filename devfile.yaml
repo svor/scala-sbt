@@ -7,9 +7,6 @@ components:
   - name: tools
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-d433ed6
-      env:
-        - name: JDK_JAVA_OPTIONS
-          value: "-XX:MaxRAMPercentage=80 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
       endpoints:
         - exposure: none
           name: debug
