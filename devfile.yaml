@@ -11,15 +11,6 @@ components:
         - name: JDK_JAVA_OPTIONS
           value: >-
             -XX:MaxRAMPercentage=80 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom
-      endpoints:
-        - exposure: none
-          name: debug
-          protocol: tcp
-          targetPort: 5005
-        - exposure: public
-          name: 8080-tcp
-          protocol: http
-          targetPort: 8080
       volumeMounts:
         - name: sbt
           path: /home/user/.sbt
@@ -27,13 +18,7 @@ components:
           path: /home/user/.ivy2
         - name: cache
           path: /home/user/.cache
-        - name: coursier
-          path: /home/user/.cache/coursier
-        - name: metals
-          path: /home/user/.cache/metals
-        - name: bloop
-          path: /home/user/.cache/bloop
-      memoryLimit: 5Gi
+      memoryLimit: 3Gi
       mountSources: true
   - name: sbt
     volume:
@@ -44,50 +29,3 @@ components:
   - name: cache
     volume:
       size: 512Mi
-  - name: coursier
-    volume:
-      size: 512Mi
-  - name: metals
-    volume:
-      size: 512Mi
-  - name: bloop
-    volume:
-      size: 512Mi
-commands:
-  - id: build
-    exec:
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/scala-sbt
-      commandLine: "./sbt Test/compile"
-      group:
-        kind: build
-        isDefault: true
-  - id: package
-    exec:
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/scala-sbt
-      commandLine: "./sbt packageLocal"
-      group:
-        kind: build
-  - id: sbt-repl
-    exec:
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/scala-sbt
-      commandLine: "./sbt"
-      group:
-        kind: run
-  - id: run
-    exec:
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/scala-sbt
-      commandLine: "./sbt run"
-      group:
-        kind: run
-        isDefault: true
-  - id: test
-    exec:
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/scala-sbt
-      commandLine: "./sbt test"
-      group:
-        kind: run
