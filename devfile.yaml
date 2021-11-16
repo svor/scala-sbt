@@ -6,7 +6,7 @@ attributes:
 components:
   - name: tools
     container:
-      image: vsvydenko/udi:scala
+      image: quay.io/devfile/universal-developer-image:ubi8-d433ed6
       env:
         - name: JDK_JAVA_OPTIONS
           value: >-
@@ -25,34 +25,34 @@ components:
           path: /home/user/.sbt
         - name: ivy2
           path: /home/user/.ivy2
+        - name: cache
+          path: /home/user/.cache
         - name: coursier
           path: /home/user/.cache/coursier
         - name: metals
           path: /home/user/.cache/metals
         - name: bloop
           path: /home/user/.cache/bloop
-        - name: cache
-          path: /home/user/.cache
       memoryLimit: 5Gi
       mountSources: true
   - name: sbt
     volume:
-      size: 512Mi
+      size: 1G
   - name: ivy2
     volume:
-      size: 512Mi
-  - name: coursier
-    volume:
-      size: 512Mi
-  - name: metals
-    volume:
-      size: 512Mi
-  - name: bloop
-    volume:
-      size: 512Mi
+      size: 1G
   - name: cache
     volume:
-      size: 512Mi
+      size: 1G
+  - name: coursier
+    volume:
+      size: 1G
+  - name: metals
+    volume:
+      size: 1G
+  - name: bloop
+    volume:
+      size: 1G
 commands:
   - id: build
     exec:
